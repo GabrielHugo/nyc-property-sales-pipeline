@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: myc-property-sales-pipeline
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+
+  etl_python:
+    build: .
+    depends_on:
+      - db
+    volumes:
+      - ./scripts:/app/scripts
+    environment:
+      - MOT_DE_PASSE_DB=${MYSQL_ROOT_PASSWORD}
+
+volumes:
+  db:
