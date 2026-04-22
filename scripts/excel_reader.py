@@ -24,4 +24,4 @@ class ExtractTransform:
         df_transform = df_transform.replace(r"^\s*$", value=np.nan, regex=True)
         df_transform[["LAND SQUARE FEET", "GROSS SQUARE FEET", "SALE PRICE"]] = df_transform[["LAND SQUARE FEET", "GROSS SQUARE FEET", "SALE PRICE"]].replace(r"^\s*-\s*$", np.nan, regex=True)
 
-        return df_transform
+        return df_transform.head(200)
